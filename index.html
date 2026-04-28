@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get Data From API</title>
+  </head>
+  <body>
+    <table id="table">
+      <tr>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Image</td>
+      </tr>
+    </table>
+
+    <script>
+      // show data on the table
+      //         let data = [];
+      //         const table = document.querySelector('table');
+      // console.log(data);
+      const getdata = async () => {
+        const response = await fetch("http://localhost:6166/get-all-users");
+        let data = await response.json();
+        //  console.log(data);
+        const table = document.getElementById("table");
+        data.map((value) => {
+          const tr = document.createElement("tr");
+          const td = document.createElement("td");
+          const image = document.createElement("img");
+          image.src = value.image;
+
+          td.innerText = value.name;
+          td.appendChild(image);
+          tr.appendChild(td);
+          table.appendChild(tr);
+          // console.log(value.name)
+        });
+        // console.log(data);
+      };
+      getdata();
+    </script>
+  </body>
+</html>
